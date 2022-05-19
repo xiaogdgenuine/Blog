@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+  <head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Huikai Chen">
+
+
+
+
+<meta name="description" content="今天给大家分享（安利）我最近开发的一个 macOS app - Doll，它能改善你的 Mac 菜单栏体验。 解决什么问题？如果你的 Mac 使用习惯也和我一样，喜欢【自动隐藏 Dock + 窗口全屏】进行日常工作，那么时不时地 遗漏工作消息 一定是你的日常。 为什么总会遗漏消息？因为全屏的时候，Menu Bar 会隐藏，自动隐藏的 Dock 又很不好调出来（甚至可能划拉了五六下都出不来）。这两个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="打造小而美，Doll - 菜单栏小助手">
+<meta property="og:url" content="https://blog.kedamanga.com/2022/01/28/doll-the-badge-catcher/">
+<meta property="og:site_name" content="小广东的博客">
+<meta property="og:description" content="今天给大家分享（安利）我最近开发的一个 macOS app - Doll，它能改善你的 Mac 菜单栏体验。 解决什么问题？如果你的 Mac 使用习惯也和我一样，喜欢【自动隐藏 Dock + 窗口全屏】进行日常工作，那么时不时地 遗漏工作消息 一定是你的日常。 为什么总会遗漏消息？因为全屏的时候，Menu Bar 会隐藏，自动隐藏的 Dock 又很不好调出来（甚至可能划拉了五六下都出不来）。这两个">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/xiaogdgenuine/Blog/main/imgs/dock-only.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/xiaogdgenuine/Blog/main/imgs/showcase.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/xiaogdgenuine/Blog/main/imgs/install.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/xiaogdgenuine/Blog/main/imgs/prevent-open.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/xiaogdgenuine/Blog/main/imgs/open-anyway.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/xiaogdgenuine/Blog/main/imgs/usage.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/xiaogdgenuine/Blog/main/imgs/ask-for-permission.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/xiaogdgenuine/Blog/main/imgs/grant-permission.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/xiaogdgenuine/Blog/main/imgs/config.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/xiaogdgenuine/Blog/main/imgs/multiple.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/xiaogdgenuine/Blog/main/imgs/doll.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/xiaogdgenuine/Blog/main/imgs/useless.png">
+<meta property="article:published_time" content="2022-01-27T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-19T11:53:13.973Z">
+<meta property="article:author" content="Huikai Chen">
+<meta property="article:tag" content="Doll">
+<meta property="article:tag" content="Menu bar">
+<meta property="article:tag" content="Productivity">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/xiaogdgenuine/Blog/main/imgs/dock-only.png">
+
+
+<title>打造小而美，Doll - 菜单栏小助手 | 小广东的博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Roboto+Mono&display=swap');
+</style>
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/frame.js"></script>
+    
+
+
+
+
+
+
+
+    <script src='https://unpkg.com/valine@1.4.16/dist/Valine.min.js'></script>
+
+
+
+
+  <meta name="generator" content="Hexo 6.2.0"></head>
+  <body>
+    <div class="mask-border">
+    </div>
+
+    <div class="wrapper">
+
+      <div class="header">
+  <div class="flex-container">
+    <div class="header-inner">
+      <div class="site-brand-container">
+        <a href="/">
+          
+            Keda.
+          
+        </a>
+      </div>
+      <div id="menu-btn" class="menu-btn" onclick="toggleMenu()">
+        Menu
+      </div>
+      <nav class="site-nav">
+        <ul class="menu-list">
+          
+            
+              <li class="menu-item">
+                <a href="/">主页</a>
+              </li> 
+                   
+          
+            
+              <li class="menu-item">
+                <a href="/archives/">文章</a>
+              </li> 
+                   
+          
+            
+              <li class="menu-item">
+                <a href="/categories/gallery/">Gallery</a>
+              </li> 
+                   
+          
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main">
+        <div class="flex-container">
+          <article id="post">
+  
+    <div class="post-head">
+    <div class="post-info">
+        <div class="tag-list">
+            
+                
+                    <span class="post-tag">
+                        <a href="/tags/Doll/">
+                            Doll
+                        </a>
+                    </span>    
+                
+                    <span class="post-tag">
+                        <a href="/tags/Menu-bar/">
+                            Menu bar
+                        </a>
+                    </span>    
+                
+                    <span class="post-tag">
+                        <a href="/tags/Productivity/">
+                            Productivity
+                        </a>
+                    </span>    
+                           
+            
+        </div>
+        <div class="post-title">
+            
+            
+                打造小而美，Doll - 菜单栏小助手
+            
+            
+        </div>
+        <span class="post-date">
+            1月 28, 2022
+        </span>
+    </div>
+    <div class="post-img">
+        
+            <img src="https://raw.githubusercontent.com/xiaogdgenuine/Blog/main/imgs/doll.png" alt="featured_image">
+              
+    </div>
+</div>
+    <div class="post-content">
+    <p>今天给大家分享（<del>安利</del>）我最近开发的一个 macOS app - <strong>Doll</strong>，它能改善你的 Mac 菜单栏体验。</p>
+<h2 id="解决什么问题？"><a href="#解决什么问题？" class="headerlink" title="解决什么问题？"></a>解决什么问题？</h2><p>如果你的 Mac 使用习惯也和我一样，喜欢【自动隐藏 Dock + 窗口全屏】进行日常工作，那么时不时地 <strong><em>遗漏工作消息</em></strong> 一定是你的日常。</p>
+<p>为什么总会遗漏消息？因为全屏的时候，Menu Bar 会隐藏，自动隐藏的 Dock 又很不好调出来（甚至可能划拉了五六下都出不来）。这两个 App 常驻的位置都看不到了，那一旦你没有看到一开始的消息通知（分神了或者喝茶喝水去了），等你回来继续工作，你根本不会意识到需要去调出 Dock 看看有没有红点点（当然离开座位要锁屏噢朋友）。</p>
+<p>非全屏模式也并非高枕无忧，我常用的 <strong>Slack</strong>，<strong>Mail</strong>，<strong>Microsoft Teams</strong> 之类的应用是没有菜单栏常驻图标的，只能通过 Dock 确认有没有新消息，你专心写代码的时候也不会时常调出 Dock。</p>
+<p><img src="https://raw.githubusercontent.com/xiaogdgenuine/Blog/main/imgs/dock-only.png" alt="dock-only"></p>
+<p>如果应用提供了菜单栏常驻图标，那这个问题就可以很大程度上缓解，因为就算没有新消息的时候，为了看时间你也会时不时地喵上几眼菜单栏，而菜单栏比 Dock 更易见得多，就算隐藏了也只需要把鼠标移动到屏幕上方即可快速显示。</p>
+<p><strong>Doll</strong> 解决的就是这么一个小小小小小…众需求，它可以帮你把 Dock 上的图标和未读消息同步到菜单栏上！</p>
+<p><img src="https://raw.githubusercontent.com/xiaogdgenuine/Blog/main/imgs/showcase.png" alt="showcase"></p>
+<h2 id="如何获取"><a href="#如何获取" class="headerlink" title="如何获取"></a>如何获取</h2><p>我把 <strong>Doll</strong> 开源并托管在了 Github 上，你可以去这个<a target="_blank" rel="noopener" href="https://github.com/xiaogdgenuine/Doll/releases/tag/v0.0.1">页面下载 dmg 安装文件</a></p>
+<h2 id="如何安装"><a href="#如何安装" class="headerlink" title="如何安装"></a>如何安装</h2><p>双击 dmg 文件，把 Doll.app 拖到 Application 目录<br><img src="https://raw.githubusercontent.com/xiaogdgenuine/Blog/main/imgs/install.png" alt="Install"></p>
+<p>双击打开 Doll，此时系统应该会提示你这是未被验证的开发者发布的程序，不允许你打开，这是正常的因为我只是简单地发布了个未签名的 dmg 文件，并没有准备上架 App Store，点击 OK 继续。<br><img src="https://raw.githubusercontent.com/xiaogdgenuine/Blog/main/imgs/prevent-open.png"></p>
+<p>Command + Space 打开 System Preferences &gt; Security &gt; General &gt; Open anyway<br><img src="https://raw.githubusercontent.com/xiaogdgenuine/Blog/main/imgs/open-anyway.png"></p>
+<h2 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h2><p>使用方法很简单，App 启动后会要求你选择一个 App 进行观测，同时你也可以进行搜索:</p>
+<p><img src="https://raw.githubusercontent.com/xiaogdgenuine/Blog/main/imgs/usage.png" alt="Usage"></p>
+<p>当你选择好要观测的 App 后，<strong>Doll</strong> 会请求你授予 <strong>Accessibility API</strong> 权限:<br><img src="https://raw.githubusercontent.com/xiaogdgenuine/Blog/main/imgs/ask-for-permission.png" alt="Ask for permission"></p>
+<p>确保你授予了 <strong>Doll.app</strong> 使用 <strong>Accessibility API</strong> 的权限否则观测不会起任何作用。<br><img src="https://raw.githubusercontent.com/xiaogdgenuine/Blog/main/imgs/grant-permission.png" alt="Grant permission"></p>
+<p>搞定!<br><strong>Doll</strong> 现在会自动同步 Dock 的 App Badge 信息到菜单栏对应的图标，你不用再担心漏回消息了!</p>
+<h1 id="切换当前观测的-App"><a href="#切换当前观测的-App" class="headerlink" title="切换当前观测的 App"></a>切换当前观测的 App</h1><p>如果被观测的 App 正在运行, 点击菜单栏图标只会简单地打开那个 App。</p>
+<p>如果你想更改设置，只需要按住 “<strong><em>Option 键(⌥)</em></strong>“ 然后点击图标.</p>
+<p><img src="https://raw.githubusercontent.com/xiaogdgenuine/Blog/main/imgs/config.png" alt="Config"></p>
+<h1 id="同时监测多个-App"><a href="#同时监测多个-App" class="headerlink" title="同时监测多个 App"></a>同时监测多个 App</h1><p>没有问题，点击这个小加号就行。<br><img src="https://raw.githubusercontent.com/xiaogdgenuine/Blog/main/imgs/multiple.png" alt="Multiple monitor"></p>
+<h2 id="为什么需要-Accessibility-API-权限？不会有安全隐患吧？"><a href="#为什么需要-Accessibility-API-权限？不会有安全隐患吧？" class="headerlink" title="为什么需要 Accessibility API 权限？不会有安全隐患吧？"></a>为什么需要 Accessibility API 权限？不会有安全隐患吧？</h2><p><strong><em>绝对！不要！相信！互联网！</em></strong></p>
+<p>当然有风险当然有隐患，没事不要瞎装软件。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/xiaogdgenuine/Doll"><strong>Doll</strong></a> 是开源的，如果你不放心我提供的 dmg 包，随时欢迎你克隆，审查，修改代码然后编译属于你自己的安装包。</p>
+<h2 id="Doll？什么怪名字。"><a href="#Doll？什么怪名字。" class="headerlink" title="Doll？什么怪名字。"></a><strong>Doll</strong>？什么怪名字。</h2><p><strong>Doll</strong> 这个名字来自我很喜欢的动画<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/DARKER_THAN_BLACK">《黑之契约者》</a>, 动画里如果一个 <strong><em>契约者</em></strong> 一直使用他的超能力但却从不支付 <strong>代价</strong>, 那么最终他的能力会失控，丧失自我成为毫无感情的 **<em>Doll</em>**，终日面无表情（误.</p>
+<p><img src="https://raw.githubusercontent.com/xiaogdgenuine/Blog/main/imgs/doll.png" alt="Doll"></p>
+<p>如果我们工作中使用了太多的 <strong>专注能力</strong> 却从来不支付 <strong>代价</strong>，我们会变成什么呢～ &gt;&gt;__&lt;&lt;.</p>
+<h2 id="怎么实现的？"><a href="#怎么实现的？" class="headerlink" title="怎么实现的？"></a>怎么实现的？</h2><p>整个项目的 UI 完全由 SwiftUI 实现。</p>
+<p>核心的获取 Badge 信息的代码存放在单独的一个叫 <a target="_blank" rel="noopener" href="https://github.com/xiaogdgenuine/Doll/tree/main/MonitorCore">MonitorCore</a> 的 Swift Package 中，使用了 macOS 的 Accessibility API，因为 API 的限制，<strong>Doll</strong> 只能通过 Polling 的方式每隔 1s 同步一次 Badge 信息，不过无需担心性能，因为每个轮询操作只是简单的读取和设置文本，而且一天最多执行 86400 次，对 Mac 来说洒洒水而已啦。</p>
+<p>具体细节就有劳各位自己看代码啦。</p>
+<h2 id="近来的一些些感想"><a href="#近来的一些些感想" class="headerlink" title="近来的一些些感想"></a>近来的一些些感想</h2><h3 id="学习一门新语言的建议"><a href="#学习一门新语言的建议" class="headerlink" title="学习一门新语言的建议"></a>学习一门新语言的建议</h3><p>因为最近刚加入了很优秀的 iOS 开发团队，为了不拖后腿一直在恶补 Swift 各种语法和新特性，这个学习的过程也有一些心得想分享一下。</p>
+<p>我以前是专职前端开发的，最近一年多才慢慢接触 iOS 开发，这个小项目也是我为了用熟 Swift 语言的各种新特性给自己找的课题。</p>
+<p>以前学一门计算机语言时我喜欢把一整本教程书啃完再动手实践，一边看书一边心里还会默念类似 “啊这都要单独写出来吗谁不懂啊”，“不就是个尾递归优化嘛又在这水页数” 的话，可每每到了看完书要动手的时候就抓瞎了，好像什么语法都懂，但就是没有兴趣用这门语言写点东西，最后往往就不了了之，过个一年半载语法又忘光了，学 Java, Python，Ruby 都是这样。</p>
+<p>但其实我也有学得蛮好的语言，C# 尽管多年没复习了每年还是能用它写点自娱自乐的 Windows 软件，JavaScript 更不用说是看家吃饭的手艺，轮子一个接一个造，近两年来 Swift 也是用得越来越熟练，甚至还开发了一个广受好评的 <a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/%E5%8F%AF%E8%BE%BE%E6%BC%AB%E7%94%BB-%E6%9C%AC%E5%9C%B0%E6%BC%AB%E7%94%BB%E9%98%85%E8%AF%BB%E5%99%A8/id1545372338">App</a>。</p>
+<p>回顾一下我用得最好的这三门语言，发觉我反而没有系统地学过它们，</p>
+<ul>
+<li>C# 能学起来是因为想用 WPF 实现一个炫酷的桌面聊天软件。</li>
+<li>JavaScript 能学起来是因为第一家公司的宣传网站是我一个人搭的。</li>
+<li>Swift 能学起来是因为我买了 iPad 想好好看漫画而不得。</li>
+</ul>
+<p>基本上稍微系统地学习这些语言都是在我已经做出了一点成果之后了，需要更精进的时候我才会去买一些书来看，而且此时我的针对性很强，我要解决的就是开发过程中遇到的非常具体的问题，要买什么书要学什么技术我基本也都门清了。</p>
+<p>而怎么也学不好的那几门语言，是因为我就从没想好用它们做点什么，学习的动力来源非常单一：“这么火应该学”。</p>
+<p>说出来不怕大伙笑话，什么异步多线程编程，竞态资源，自旋锁，信号量，Async Await，内存泄露排查，性能调优，我这种半路出家的刚入行那几年根本连概念都看不懂，书也看不下去。</p>
+<p>可一旦开始写一个感兴趣的项目了，我就想提高它的稳定性，改善它的性能，各种变着法想让它更好用，于是这个过程里我就什么语言特性都学到了，用得也更扎实了，成就感是非常强的，经常解决完问题后激动地原地跺 JoJo！</p>
+<p>说到底计算机科学还是更偏向实践一些，因此对于语言初学者，不管你在学什么语言，我的建议是学完简单的基础后就先把书合起来吧，马上动手去做点东西才能保住你那份热情，前期多做，后期多学，会是正反馈周期比较合理的方式。</p>
+<h3 id="iOS-开发的效率"><a href="#iOS-开发的效率" class="headerlink" title="iOS 开发的效率"></a>iOS 开发的效率</h3><p>搞 iOS 开发的同学们，SwiftUI 现在必须立刻马上武装到你的技能树上，投资回报率是近几年最高的了！</p>
+<p><strong>Doll</strong> 仅仅花了我 3 个晚上就写完了，90% 的时间其实花在了查 macOS 的 API 文档上，UI 部分可以说毫无阻力，想哪写哪，随时预览随时调节。</p>
+<p>虽然因为用了较新的 SwiftUI 所以 <strong>Doll</strong> 只能跑在 macOS 11.0(Big Sur) 以上的系统，但这个牺牲完全值得！如果我为了兼容老系统改用 UIKit 实现界面，我这会儿应该还在纠结为什么 UICollectionViewDataSource 就是不更新，Layout Constraints 应该 Enable 哪几个，Disable 哪几个，要怎么实现数据绑定。。。等我实现出一版 UIKit，竞品早已经迭代了好几版 UI 了。</p>
+<h3 id="规划"><a href="#规划" class="headerlink" title="规划"></a>规划</h3><p>虽然说有想法就赶紧上机开码的感觉特别爽（谁开机谁知道），但该缓一缓的时候还是得及时刹车。</p>
+<p>开发 <strong>Doll</strong> 的时候我就犯了急性子的大错，想当然觉得全屏模式时，应该在有新消息的时候显示一个小小的通知 Popover 好让用户注意到。为了实现这个 Popover 又花了一小时查怎么确定当前窗口是全屏模式（实名吐槽 Apple 烂文档，交了那么多钱就这体验），然后又一顿调试终于实现了。</p>
+<p>最后当我在全屏模式下发了一条测试消息的时候，我傻眼了：</p>
+<p><img src="https://raw.githubusercontent.com/xiaogdgenuine/Blog/main/imgs/useless.png" alt="Useless feature"></p>
+<p>你说这一个多小时能找谁要回来？其实脑子只要停下来想一想马上就能意识到这个功能鸡肋至极，可是脑子说不行，你不能停，这个 idea 太棒了用户一定会赞不绝口的！</p>
+<p>这种错我还是偶尔会犯，对抗本能太难了，这个鸡肋功能就留在 <strong>Doll</strong> 里作为提醒吧。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>希望 <strong>Doll</strong> 这个小作品能小小地提高大家的工作体验，也祝愿各位大姑娘小伙子们能找回那种开发软件解决问题的纯粹乐趣。</p>
+
+</div> 
+
+<script>
+    window.onload = detectors();
+</script>
+    <div class="post-footer">
+    <div class="h-line-primary"></div>
+    <nav class="post-nav">
+        <div class="prev-item">
+           
+        </div>
+        <div class="next-item">
+            
+                <div class="icon arrow-right"></div>
+                <div class="post-link">
+                  <a href="/2022/01/11/to-papa/">Next</a>  
+                </div>  
+            
+        </div>
+    </nav>
+</div>
+
+    
+      <div class="post-comment">
+
+    
+        <div id="vcomments"></div>
+        <script>
+            var META = ['nick', 'mail', 'link'];
+            var meta = 'nick,mail';
+            meta = meta.split(',').filter(item => {
+                return META.includes(item);
+            });
+            new Valine({
+                el: '#vcomments',
+                appId: 'QIYyfg4T07iSGvKbJuWdOdaz-gzGzoHsz',
+                appKey: 'AWAe2ddUvgxXCoAC2SE5V8FV',
+                lang: 'en',
+                placeholder: 'Say something',
+                avatar: 'mp',
+                meta: meta
+            })
+        </script>    
+     
+
+     
+    
+    
+
+</div>
+     
+  
+</article>
+        </div>
+      </div>
+      
+      <div class="footer">
+    <div class="flex-container">
+        <div class="footer-text">
+            
+            
+                © Huikai Chen | 
+            
+            
+                Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & <a target="_blank" rel="noopener" href="https://github.com/zoeingwingkei/frame/">Frame</a>
+                
+        </div>
+    </div>
+</div>
+
+    </div>
+
+  </body>
+</html>
