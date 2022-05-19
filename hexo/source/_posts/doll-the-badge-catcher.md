@@ -7,7 +7,7 @@ tags:
 - Doll
 - Menu bar
 - Productivity
-featured_image: https://raw.githubusercontent.com/xiaogdgenuine/Blog/main/imgs/doll.png
+featured_image: https://s2.loli.net/2022/05/19/yhvJYpoaSHuMXcD.jpg
 ---
 
 今天给大家分享（~~安利~~）我最近开发的一个 macOS app - **Doll**，它能改善你的 Mac 菜单栏体验。
@@ -20,37 +20,37 @@ featured_image: https://raw.githubusercontent.com/xiaogdgenuine/Blog/main/imgs/d
 
 非全屏模式也并非高枕无忧，我常用的 **Slack**，**Mail**，**Microsoft Teams** 之类的应用是没有菜单栏常驻图标的，只能通过 Dock 确认有没有新消息，你专心写代码的时候也不会时常调出 Dock。
 
-![dock-only](https://raw.githubusercontent.com/xiaogdgenuine/Blog/main/imgs/dock-only.png)
+![dock-only](https://s2.loli.net/2022/05/19/XbqsVyT3EYFeMJU.png)
 
 如果应用提供了菜单栏常驻图标，那这个问题就可以很大程度上缓解，因为就算没有新消息的时候，为了看时间你也会时不时地喵上几眼菜单栏，而菜单栏比 Dock 更易见得多，就算隐藏了也只需要把鼠标移动到屏幕上方即可快速显示。
 
 **Doll** 解决的就是这么一个小小小小小...众需求，它可以帮你把 Dock 上的图标和未读消息同步到菜单栏上！
 
-![showcase](https://raw.githubusercontent.com/xiaogdgenuine/Blog/main/imgs/showcase.png)
+![showcase](https://s2.loli.net/2022/05/19/moFvwhnVE7iUbjt.png)
 
 ## 如何获取
-我把 **Doll** 开源并托管在了 Github 上，你可以去这个[页面下载 dmg 安装文件](https://github.com/xiaogdgenuine/Doll/releases/tag/v0.0.1)
+我把 **Doll** 开源并托管在了 Github 上，你可以去这个[页面下载 dmg 安装文件](https://github.com/xiaogdgenuine/Doll/releases)
 
 ## 如何安装
 双击 dmg 文件，把 Doll.app 拖到 Application 目录
-![Install](https://raw.githubusercontent.com/xiaogdgenuine/Blog/main/imgs/install.png)
+![install](https://s2.loli.net/2022/05/19/15VfosQmnRw2Ppc.png)
 
 双击打开 Doll，此时系统应该会提示你这是未被验证的开发者发布的程序，不允许你打开，这是正常的因为我只是简单地发布了个未签名的 dmg 文件，并没有准备上架 App Store，点击 OK 继续。
-![](https://raw.githubusercontent.com/xiaogdgenuine/Blog/main/imgs/prevent-open.png)
+![prevent-open](https://s2.loli.net/2022/05/19/Tj5WC2XLZ6EgFzi.png)
 
 Command + Space 打开 System Preferences > Security > General > Open anyway
-![](https://raw.githubusercontent.com/xiaogdgenuine/Blog/main/imgs/open-anyway.png)
+![open-anyway](https://s2.loli.net/2022/05/19/STHDeVWO1UJ5igy.png)
 
 ## 如何使用
 使用方法很简单，App 启动后会要求你选择一个 App 进行观测，同时你也可以进行搜索:
 
-![Usage](https://raw.githubusercontent.com/xiaogdgenuine/Blog/main/imgs/usage.png)
+![usage](https://s2.loli.net/2022/05/19/6GmFulcTeUJsNIX.png)
 
 当你选择好要观测的 App 后，**Doll** 会请求你授予 **Accessibility API** 权限: 
-![Ask for permission](https://raw.githubusercontent.com/xiaogdgenuine/Blog/main/imgs/ask-for-permission.png)
+![ask-for-permission](https://s2.loli.net/2022/05/19/ZfTzyiFx1r2PpkL.png)
 
 确保你授予了 **Doll.app** 使用 **Accessibility API** 的权限否则观测不会起任何作用。
-![Grant permission](https://raw.githubusercontent.com/xiaogdgenuine/Blog/main/imgs/grant-permission.png)
+![grant-permission](https://s2.loli.net/2022/05/19/geSnwF1Y6DRItW4.png)
 
 搞定!
 **Doll** 现在会自动同步 Dock 的 App Badge 信息到菜单栏对应的图标，你不用再担心漏回消息了!
@@ -60,11 +60,11 @@ Command + Space 打开 System Preferences > Security > General > Open anyway
 
 如果你想更改设置，只需要按住 "**_Option 键(⌥)_**" 然后点击图标.
 
-![Config](https://raw.githubusercontent.com/xiaogdgenuine/Blog/main/imgs/config.png)
+![config](https://s2.loli.net/2022/05/19/vZRXOU2AqTMlNiI.png)
 
 # 同时监测多个 App
 没有问题，点击这个小加号就行。
-![Multiple monitor](https://raw.githubusercontent.com/xiaogdgenuine/Blog/main/imgs/multiple.png)
+![multiple-monitor](https://s2.loli.net/2022/05/19/G4cgpbK9sajNSWh.png)
 
 ## 为什么需要 Accessibility API 权限？不会有安全隐患吧？
 **_绝对！不要！相信！互联网！_**
@@ -77,7 +77,7 @@ Command + Space 打开 System Preferences > Security > General > Open anyway
 
 **Doll** 这个名字来自我很喜欢的动画[《黑之契约者》](https://zh.wikipedia.org/wiki/DARKER_THAN_BLACK), 动画里如果一个 **_契约者_** 一直使用他的超能力但却从不支付 **代价**, 那么最终他的能力会失控，丧失自我成为毫无感情的 **_Doll_**，终日面无表情（误.
 
-![Doll](https://raw.githubusercontent.com/xiaogdgenuine/Blog/main/imgs/doll.png)
+![doll](https://s2.loli.net/2022/05/19/yhvJYpoaSHuMXcD.jpg)
 
 如果我们工作中使用了太多的 **专注能力** 却从来不支付 **代价**，我们会变成什么呢～ >>__<<.
 
@@ -131,7 +131,7 @@ Command + Space 打开 System Preferences > Security > General > Open anyway
 
 最后当我在全屏模式下发了一条测试消息的时候，我傻眼了：
 
-![Useless feature](https://raw.githubusercontent.com/xiaogdgenuine/Blog/main/imgs/useless.png)
+![useless](https://s2.loli.net/2022/05/19/QuxcpK2rw6URBez.png)
 
 你说这一个多小时能找谁要回来？其实脑子只要停下来想一想马上就能意识到这个功能鸡肋至极，可是脑子说不行，你不能停，这个 idea 太棒了用户一定会赞不绝口的！
 
