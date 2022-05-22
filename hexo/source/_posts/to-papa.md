@@ -1,6 +1,5 @@
 ---
 title: "纪念我的爸爸。"
-url: "to-pa-pa"
 date: 2022-01-11
 categories:
 - 人生

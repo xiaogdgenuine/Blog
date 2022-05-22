@@ -6,12 +6,14 @@
     "build": "hexo generate",
     "clean": "hexo clean",
     "deploy": "hexo deploy",
-    "server": "hexo server"
+    "server": "hexo server",
+    "local": "http-server ../docs -p 7788"
   },
   "hexo": {
     "version": "6.2.0"
   },
   "dependencies": {
+    "cheerio": "^1.0.0-rc.11",
     "hexo": "^6.2.0",
     "hexo-generator-archive": "^1.0.0",
     "hexo-generator-category": "^1.0.0",
@@ -21,6 +23,10 @@
     "hexo-renderer-marked": "^5.0.0",
     "hexo-renderer-stylus": "^2.0.0",
     "hexo-server": "^3.0.0",
-    "hexo-theme-landscape": "^0.0.3"
+    "hexo-theme-landscape": "^0.0.3",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.0"
   }
 }
