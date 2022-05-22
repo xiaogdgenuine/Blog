@@ -1,14 +1,11 @@
-<div class="post-head">
-    <div class="post-info">
-        <div class="post-title">
-            
-            <% if (page.title) {%>
+
+<% if (page.title) {%>
+    <div class="post-head">
+        <div class="post-info">
+            <div class="post-title">
                 <%= page.title %>
-            <% } else {%>
-                *Untitled
-            <% } %>
-            
+            </div>
         </div>
+        <div class="h-line-primary"></div>
     </div>
-    <div class="h-line-primary"></div>
-</div>
+<% } %>
