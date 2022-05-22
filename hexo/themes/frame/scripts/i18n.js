@@ -378,6 +378,16 @@ hexo.extend.helper.register('root_path', function () {
     return !isDefaultLanguage(this.page.lang) ? this.page.lang : '';
 });
 
+/**
+ * Check if i18n enabled
+ */
+hexo.extend.helper.register('i18n_enabled', function () {
+    if (Array. isArray(this.config.language)) {
+        return this.config.language.length > 1
+    }
+    return false
+});
+
 let routeList = []
 hexo.extend.helper.register('alternative_lang_exist', function (alternativeLang) {
     if (routeList.length === 0) {

@@ -29,7 +29,7 @@
           <% }); %>
 
           <!-- Some tags or posts doesn't have alternative language version, so we don't render language switcher for them -->
-          <% if ((!is_tag() && !is_post()) || alternative_lang_exist(get_config('alternative_lang'))) {%>
+          <% if (i18n_enabled() && ((!is_tag() && !is_post()) || alternative_lang_exist(get_config('alternative_lang')))) {%>
             <li class="menu-item">
               <a href="<%=url_for(i18n_path(get_config('alternative_lang')))%>">
                 <%=get_config('alternative_lang_label')%>
