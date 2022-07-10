@@ -32,7 +32,29 @@ As far as I know, we are unlucky, no open-sourced solution for that yet, don't c
 
 ## Setup the Desk
 
-Let's create a simple LazyVGrid as a start point.
+Let's create some data as a start point:
+
+````swift
+struct Group: Hashable {
+    let title: String
+    let items: [Item]
+}
+
+struct Item: Hashable {
+    let title: String
+}
+
+let mockData = [
+    Group(title: "Numbers",
+          items: "0123456789"
+                    .map{ Item(title: String($0)) }),
+    Group(title: "Letters",
+          items: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                    .map{ Item(title: String($0)) })
+]
+````
+
+Then we create a LazyVGrid to render these data:
 
 ````swift
 struct GridView: View {
@@ -41,16 +63,24 @@ struct GridView: View {
     ]
 
     var body: some View {
-        LazyVGrid(
-                columns: columns,
-                alignment: .center,
-                spacing: 16,
-                pinnedViews: .sectionHeaders
-        ) {
-            ForEach(Array(data.allBooksByGroupFiltered.enumerated()), id: \.element) { (groupIndex, group) in
-                Section(header: LibrarySectionHeader(title: group.title)) {
-                    ForEach(Array(group.items.enumerated()), id: \.element) { (itemIndex, content) in
-                        Text(content.label)
+        ScrollView {
+            LazyVGrid(
+                    columns: columns,
+                    alignment: .center,
+                    spacing: 16,
+                    pinnedViews: .sectionHeaders
+            ) {
+                ForEach(Array(mockData.enumerated()), id: \.element) { (groupIndex, group) in
+                    Section(header: Text(group.title)) {
+                        ForEach(Array(group.items.enumerated()), id: \.element) { (itemIndex, item) in
+                            
+                            // The cell
+                            Text(item.title)
+                                .padding()
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                .background(Color.blue)
+                            
+                        }
                     }
                 }
             }
@@ -59,15 +89,21 @@ struct GridView: View {
 }
 ````
 
+This should give us a LazyVGrid with two sections:
+
+![start-point](https://s2.loli.net/2022/05/23/tqaURvOgsfcwyTi.png)
+
 ## What we need?
 
 Simply 3 steps:
 
-1. A way to intercept the Pan gesture
+1. A way to intercept the Pan gesture of scrollable container
 2. Calculate the selection area base on that Pan gesture.
 3. Select/un-select items under that selection area.
 
-First step is super easy, we gonna use: https://github.com/siteline/SwiftUI-Introspect, it can help us get the scrolling container, then we can get the Pan gesture by `scrollView.panGesture`.
+First step is super easy, we gonna use: https://github.com/siteline/SwiftUI-Introspect, it can help us get the scrolling container, once we did it, we can attach a new Pan gesture to the scrollable container.
+
+
 
 
 
