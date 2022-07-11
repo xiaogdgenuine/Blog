@@ -165,8 +165,9 @@ To be honest, as a developer, I never get used to Terminal.
 
 I'm very careful when doing tasks in command line, I check my input over and over again to make sure I didn't write to wrong file, delete the wrong folder, I'm rather slow on Terminal because these stresses...
 
-I love GUI, really, proper designed GUI tools is really master pice, easy to use and stress-free.
-But when it comes to automation, command line just.... kill GUI :). GUI just not design for automation tasks, you just can't setup the workflow easily with GUI.
+I love GUI, really. Proper designed GUI tools is master pice, easy to use and stress-free.
+
+But when it comes to automation, command line just.... kill GUI :). GUI isn't design for automation tasks at the first place, you can't never setup the automation workflow easily with GUI.
 
 Luckly, we don't have to choice between them, we can have an application that include both Command line and GUI.
 
