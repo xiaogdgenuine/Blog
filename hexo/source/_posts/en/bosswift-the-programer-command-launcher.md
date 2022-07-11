@@ -19,7 +19,7 @@ As a developer，have you ever had this experience?
 
 You say ok, then you open Terminal, type bunch of commands:
 
-```lang=bash
+```bash
 # Store your temporary works
 git stash -u
 # Switch to problematic branch
@@ -34,7 +34,7 @@ npm run...
 
 This usually will take you couple minutes, and after the issue is resolved, you go back to work on your original task, by type these commands in Terminal:
 
-```lang=bash
+```bash
 # Switch back to work branch
 git checkout feature/in-development
 # Restore your temporary works
@@ -45,7 +45,7 @@ npm install...
 npm run...
 ```
 
-This can happen multiple times in a day, not just to address a production issue, sometimes you also need to check different branch's runtime behavior, so you need to switch > build and run > switch > build and run, over and over.
+This can happen multiple times in a day, not just to address a production issue, sometimes you also need to check different branch's runtime behavior, so you need to **switch > build and run > switch > build and run...** over and over.
 
 This doesn't sound productive, what can we do about it?
 
@@ -54,7 +54,8 @@ Well, imagine that if we could checkout multiple branch in same machine from a r
 Yes we did! Git team apparently notice this problem too, start from git v2.5, [multiple worktrees](https://git-scm.com/docs/git-worktree) support is added, you can create multiple worktree copies from one repo, each worktree got it's own branch, just like this：
 
 ![bosswift-git-worktree-explain](https://s2.loli.net/2022/07/11/bqQ4cdguWPxza3Z.webp)
-With **git worktree**，we don't checkout branch anymore, instead we _cd_ around worktrees，and also no need to stash/unstash anymore：
+
+With **git worktree**，we don't checkout branch anymore, instead we **_cd_** around worktrees，and also no need to stash/unstash anymore：
 
 ![bosswift-new-fashion](https://s2.loli.net/2022/07/11/U62tEvT1gIrsKlY.jpg)
 
@@ -71,28 +72,40 @@ Also if we do it right, **git worktree** can help us make sure there is always a
 ## ✨✨✨ Bosswift ✨✨✨
 To solve these pain points come with use **git worktree** in command line way，**Bosswift** is born.
 **Bosswift** is a GUI app that integrated with git worktree deeply, it will help you manage worktrees without presure.
+
 ![bosswift-introduction](https://s2.loli.net/2022/07/11/dQnKzR5gjMTA718.png)
 
 # Installation + Setup
 You can download the latest release from [here](https://github.com/xiaogdgenuine/bosswift/releases/latest)
+
 ![bosswift-install](https://s2.loli.net/2022/07/11/E9tuLSBJAUX6bjd.png)
 
 Some setups is required when you open **Bosswift**，the only important step is to specify where you put your working repos, so that **Bosswift** can monitor & sync the worktree status with your repos:
+
 ![bosswift-on-boarding](https://s2.loli.net/2022/07/11/WJIgGTZHxsq92ak.png)
 
 # Usage
 After you done configuration, press **_Option + Space_** (Default) to open quick launch bar.
+
 ![bosswift-quick-launch-bar](https://s2.loli.net/2022/07/11/BA4dlWFDEuaqjVe.png)
+
 Step 1, search & pick a worktree，hit enter/tab to select it：
+
 ![bosswift-quick-launch-search-branch](https://s2.loli.net/2022/07/11/icIqUQ8T3s9m1jX.png)
+
 Step 2. Search & pick a command, hit enter to execute：
+
 ![bosswift-quick-pick-command](https://s2.loli.net/2022/07/11/9tc7LSs6mf5IJMQ.png)
 
 ## Create new Worktree
 When you need a new worktree, do this command:
+
 ![bosswift-create-worktree](https://s2.loli.net/2022/07/11/6EXZYkdlr5Pa2Jv.png)
+
 All you need is to input a branch name:
+
 ![bosswift-create-worktree-branch-name](https://s2.loli.net/2022/07/11/N7PVZYqS6zlv2nC.png)
+
 It will take care these cases for you
 - A local branch with same name exist：Switch new worktree to that branch.
 - A same name branch exists in remote：Fetch that remote branch to local，create new worktree and switch to that branch.
@@ -102,6 +115,7 @@ You could modify that command, add some steps like "**Copy node_modules from ori
 
 ## Delete Worktree
 Whe you no longer work on a worktree, you can save the disk usage by doing this command to delete the worktree：
+
 ![bosswift-delete-worktree](https://s2.loli.net/2022/07/11/KXynVNlpHodg69h.png)
 
 You could modify that command, add some steps like "**Delete Xcode Derived Data folder**" to the end, to release disk space.
@@ -127,18 +141,23 @@ For example, if I select _feature_ branch of _Doll_ Repo under path _/Users/huik
 
 # Dashboard
 You can check running tasks in Dashboard:
+
 ![bosswift-dashboard](https://s2.loli.net/2022/07/11/sdKzgDEtYRvQj5N.png)
 
 # As an Universal command launcher
 Some command can be run from anywhere, and you always forgot how to type them, for example sometimes Xcode failed to recognize iPhone connected by usb cable, to fix that I need to restart **usb service**, but I never remember the command, I always need to copy it from google or Notes app.
 
 Now with **Bosswift**，you could put these commands into **Universal Command**：
+
 ![bosswift-universal-commands](https://s2.loli.net/2022/07/11/ivKCaHUuGOwADyX.png)
+
 Type "/" in quick launch box, then you can pick an Universal Command to run:
+
 ![bosswift-select-universal-command](https://s2.loli.net/2022/07/11/tkEiXnsAhY9Bxcb.png)
 
 # As a temporary command launcher
 If there's not command match the keyword in quick launch box, you can hit enter and execute the keyword as command directly:
+
 ![bosswift-temporary-commands](https://s2.loli.net/2022/07/11/UIE45RKTbSrCiNg.png)
 
 ## Command line or GUI?

@@ -169,10 +169,10 @@
 <p>你正工作在某个开发任务上，同事紧急让你帮忙定位一下另一个已上线的功能为什么表现怪异，是不是代码有什么问题。</p>
 </blockquote>
 <p>你说好，然后熟练地打开命令行窗口，打下一大串让人心疼的命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 暂存当前的工作</span><br><span class="line">git stash -u</span><br><span class="line"># 切换到线上分支</span><br><span class="line">git checkout release/v1</span><br><span class="line"># 拉取线上分支最新代码</span><br><span class="line">git pull</span><br><span class="line"># 安装依赖，配置运行环境等</span><br><span class="line">npm install...</span><br><span class="line"># 启动，定位问题</span><br><span class="line">npm run...</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 暂存当前的工作</span></span><br><span class="line">git stash -u</span><br><span class="line"><span class="comment"># 切换到线上分支</span></span><br><span class="line">git checkout release/v1</span><br><span class="line"><span class="comment"># 拉取线上分支最新代码</span></span><br><span class="line">git pull</span><br><span class="line"><span class="comment"># 安装依赖，配置运行环境等</span></span><br><span class="line">npm install...</span><br><span class="line"><span class="comment"># 启动，定位问题</span></span><br><span class="line">npm run...</span><br></pre></td></tr></table></figure>
 
 <p>折腾五六分钟后终于把环境跑起来，定位问题结束后，你又打开命令行窗口，打下另一串让人心疼的命令，继续你原本的开发任务:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 切换回工作分支</span><br><span class="line">git checkout feature/in-development</span><br><span class="line"># 恢复工作变更</span><br><span class="line">git stash apply</span><br><span class="line"># 安装依赖，配置运行环境等</span><br><span class="line">npm install...</span><br><span class="line"># 启动，继续开发</span><br><span class="line">npm run...</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 切换回工作分支</span></span><br><span class="line">git checkout feature/in-development</span><br><span class="line"><span class="comment"># 恢复工作变更</span></span><br><span class="line">git stash apply</span><br><span class="line"><span class="comment"># 安装依赖，配置运行环境等</span></span><br><span class="line">npm install...</span><br><span class="line"><span class="comment"># 启动，继续开发</span></span><br><span class="line">npm run...</span><br></pre></td></tr></table></figure>
 
 <p>如果一天内这样的事情多次出现，你的工作效率会相当低效，时间都耗费在没必要的上下文切换上了.</p>
 <p>想象一下如果我们可以同时 Checkout 多个分支，每个分支有自己专属的工作文件夹，是不是就不用这么折腾了？</p>

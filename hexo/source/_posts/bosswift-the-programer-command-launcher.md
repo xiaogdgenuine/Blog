@@ -18,7 +18,7 @@ featured_image: https://s2.loli.net/2022/07/10/AOeoQdW5Nk7pliG.jpg
 
 你说好，然后熟练地打开命令行窗口，打下一大串让人心疼的命令：
 
-```lang=bash
+```bash
 # 暂存当前的工作
 git stash -u
 # 切换到线上分支
@@ -33,7 +33,7 @@ npm run...
 
 折腾五六分钟后终于把环境跑起来，定位问题结束后，你又打开命令行窗口，打下另一串让人心疼的命令，继续你原本的开发任务:
 
-```lang=bash
+```bash
 # 切换回工作分支
 git checkout feature/in-development
 # 恢复工作变更
