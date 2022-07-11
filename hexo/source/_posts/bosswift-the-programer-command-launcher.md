@@ -51,6 +51,7 @@ npm run...
 确实是这样子的，这个频繁上下文切换的问题 git 团队也注意到了，为了解决它，git 2.5 版本开始支持 [multiple worktrees](https://git-scm.com/docs/git-worktree)，你可以在一个 git repo 里同时创建多个 worktree 拷贝，每个 worktree 都有专属于自己的分支, 类似下图：
 
 ![bosswift-git-worktree-explain](https://s2.loli.net/2022/07/11/bqQ4cdguWPxza3Z.webp)
+
 有了 git worktree，分支切换就变成了 cd 到不同的 worktree 目录，每个分支都可以拥有自己的独立工作目录，东西不会揉在一起，stash 命令也用不上了：
 
 ![bosswift-new-fashion](https://s2.loli.net/2022/07/11/U62tEvT1gIrsKlY.jpg)
@@ -69,27 +70,40 @@ git worktree 也可以帮我们确保本地一直有一个可以运行的分支�
 为了解决命令行使用 git worktree 的这些痛点，**Bosswift** 应运而生。
 
 **Bosswift** 与 git worktree 深度集成，帮助你用 UI 的方式轻松管理 worktree。
+
 ![bosswift-introduction](https://s2.loli.net/2022/07/11/dQnKzR5gjMTA718.png)
 
 # 安装 + 配置
 从[这里下载](https://github.com/xiaogdgenuine/bosswift/releases/latest)最新的安装包，双击安装。
+
 ![bosswift-install](https://s2.loli.net/2022/07/11/E9tuLSBJAUX6bjd.png)
+
 第一次打开 **Bosswift** 需要一点配置，主要就是选一下你平时的工作目录，这样 **Bosswift** 就可以随时同步 Worktree 状态，我习惯是创建一个 dev 目录存放所有工作项目：
+
 ![bosswift-on-boarding](https://s2.loli.net/2022/07/11/WJIgGTZHxsq92ak.png)
 
 # 使用
 配置完成后，按下 Option + Space (默认快捷键)，**Bosswift** 的快速启动框就打开了。
+
 ![bosswift-quick-launch-bar](https://s2.loli.net/2022/07/11/BA4dlWFDEuaqjVe.png)
+
 输入关键字搜索想要执行命令的分支（各代表一个 worktree），回车或者按 Tab 键选中：
+
 ![bosswift-quick-launch-search-branch](https://s2.loli.net/2022/07/11/icIqUQ8T3s9m1jX.png)
+
 搜索想要执行的命令，**Bosswift** 里已经自带了一些常用命令，回车即可执行：
+
 ![bosswift-quick-pick-command](https://s2.loli.net/2022/07/11/9tc7LSs6mf5IJMQ.png)
 
 ## 创建新的 Worktree
 当你需要新的 worktree 时，执行这个命令：
+
 ![bosswift-create-worktree](https://s2.loli.net/2022/07/11/6EXZYkdlr5Pa2Jv.png)
+
 此命令可基于选中的分支创建新的 worktree，你只需要输入分支名即可：
+
 ![bosswift-create-worktree-branch-name](https://s2.loli.net/2022/07/11/N7PVZYqS6zlv2nC.png)
+
 该命令会自动处理好以下几种 case
 - 本地已经有同名分支：将新 worktree 切换到该分支。
 - 本地没有对应分支，但是远端有：拉取该分支到本地，创建新 worktree 并切换到该分支。
@@ -98,12 +112,15 @@ git worktree 也可以帮我们确保本地一直有一个可以运行的分支�
 你可以修改该命令，在末尾添加诸如 "**从源分支 worktree 拷贝 node_modules**" 等操作，避免新 worktree 需要重新安装第三方依赖浪费时间。
 ## 删除 Worktree
 当你不再需要某个 worktree 时，执行这个命令删除对应的 worktree 文件夹：
+
 ![bosswift-delete-worktree](https://s2.loli.net/2022/07/11/KXynVNlpHodg69h.png)
+
 你可以修改该命令，在末尾添加清理操作，比如删除对应的 Xcode Derived Data 目录节省磁盘占用。
 
 # 编写自定义命令
 如果连自己的命令都不能编写还算什么 Boss 呢~
 我鼓励你编写适用于你项目的各种命令，**Bosswift** 会给你提供力所能及的帮助，一些可以使用的变量会在脚步运行时提供：
+
 ![bosswift-command-glossary](https://s2.loli.net/2022/07/11/rvRZuxigzPkdTVJ.png)
 
 以选中了 /Users/huikai/dev 下 Doll Repo 的 feature 分支为例，以下是各变量的解释和对应值:
@@ -120,18 +137,23 @@ git worktree 也可以帮我们确保本地一直有一个可以运行的分支�
 
 # Dashboard 查看运行中的命令
 可以在 Dashboard 管理正在运行中的任务：
+
 ![bosswift-dashboard](https://s2.loli.net/2022/07/11/sdKzgDEtYRvQj5N.png)
 
 # 作为常用命令管理器 (Universal Command)
 有一些命令是全局的，时不时就得跑一下，比如为了解决 Xcode 认不出手机的问题，我常需要重启 usb 服务，但是我总是忘了怎么写，需要去各种笔记软件里拷贝出来很麻烦。
 
 有了 **Bosswift**，这些命令都可以统一存放到 Universal Command 里了：
+
 ![bosswift-universal-commands](https://s2.loli.net/2022/07/11/ivKCaHUuGOwADyX.png)
+
 在快速启动框输入 “/” 就可以选择 Universal Command 去执行了：
+
 ![bosswift-select-universal-command](https://s2.loli.net/2022/07/11/tkEiXnsAhY9Bxcb.png)
 
 # 作为临时命令启动器
 在快速启动框输入的关键字如果没有任何匹配项，就可以直接回车作为临时命令执行：
+
 ![bosswift-temporary-commands](https://s2.loli.net/2022/07/11/UIE45RKTbSrCiNg.png)
 
 ## 命令行 还是 GUI
