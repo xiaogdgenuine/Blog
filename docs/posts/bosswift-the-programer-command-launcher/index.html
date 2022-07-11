@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh-cn,en,default">
+  <head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Huikai Chen">
+
+
+
+
+
+
+
+<title>Bosswift - 为 Git 用户设计的命令启动器 | 小广东的博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Roboto+Mono&display=swap');
+</style>
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/frame.js"></script>
+    
+
+
+
+
+
+
+
+    <script src='https://unpkg.com/valine@1.4.16/dist/Valine.min.js'></script>
+
+
+
+
+  <meta name="generator" content="Hexo 6.2.0"></head>
+  <body>
+    <div class="mask-border">
+    </div>
+
+    <div class="wrapper">
+
+      <div class="header">
+  <div class="flex-container">
+    <div class="header-inner">
+      <div class="site-brand-container">
+        <a href="/">
+          
+            Keda.
+          
+        </a>
+      </div>
+      <div id="menu-btn" class="menu-btn" onclick="toggleMenu()">
+        Menu
+      </div>
+      <nav class="site-nav">
+        <ul class="menu-list">
+          
+          
+            
+              <li class="menu-item">
+                <a href="/">主页</a>
+              </li> 
+                   
+          
+            
+              <li class="menu-item">
+                <a href="/archives/">文章</a>
+              </li> 
+                   
+          
+            
+              <li class="menu-item">
+                <a href="/categories/gallery/">画廊</a>
+              </li> 
+                   
+          
+
+          <!-- Some tags or posts doesn't have alternative language version, so we don't render language switcher for them -->
+          
+            <li class="menu-item">
+              <a href="/en/posts/bosswift-the-programer-command-launcher/">
+                En
+              </a>
+            </li> 
+          
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main">
+        <div class="flex-container">
+          <article id="post">
+
+  
+    <div class="post-head">
+    <div class="post-info">
+        <div class="tag-list">
+            
+                
+                    <span class="post-tag">
+                        <a href="/tags/Productivity/">
+                            Productivity
+                        </a>
+                    </span>    
+                
+                    <span class="post-tag">
+                        <a href="/tags/Bosswift/">
+                            Bosswift
+                        </a>
+                    </span>    
+                
+                    <span class="post-tag">
+                        <a href="/tags/Command-Launcher/">
+                            Command Launcher
+                        </a>
+                    </span>    
+                
+                    <span class="post-tag">
+                        <a href="/tags/Git/">
+                            Git
+                        </a>
+                    </span>    
+                           
+            
+        </div>
+        <div class="post-title">
+            
+            
+                Bosswift - 为 Git 用户设计的命令启动器
+            
+            
+        </div>
+        <span class="post-date">
+            7月 10, 2022
+        </span>
+    </div>
+    <div class="post-img">
+        
+            <img src="https://s2.loli.net/2022/07/10/AOeoQdW5Nk7pliG.jpg" alt="featured_image">
+              
+    </div>
+</div>
+    <div class="post-content">
+    <h2 id="一件麻烦事"><a href="#一件麻烦事" class="headerlink" title="一件麻烦事"></a>一件麻烦事</h2><p>朋友，在你的开发生涯中，是否经常有过这样的经历：</p>
+<blockquote>
+<p>你正工作在某个开发任务上，同事紧急让你帮忙定位一下另一个已上线的功能为什么表现怪异，是不是代码有什么问题。</p>
+</blockquote>
+<p>你说好，然后熟练地打开命令行窗口，打下一大串让人心疼的命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 暂存当前的工作</span><br><span class="line">git stash -u</span><br><span class="line"># 切换到线上分支</span><br><span class="line">git checkout release/v1</span><br><span class="line"># 拉取线上分支最新代码</span><br><span class="line">git pull</span><br><span class="line"># 安装依赖，配置运行环境等</span><br><span class="line">npm install...</span><br><span class="line"># 启动，定位问题</span><br><span class="line">npm run...</span><br></pre></td></tr></table></figure>
+
+<p>折腾五六分钟后终于把环境跑起来，定位问题结束后，你又打开命令行窗口，打下另一串让人心疼的命令，继续你原本的开发任务:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 切换回工作分支</span><br><span class="line">git checkout feature/in-development</span><br><span class="line"># 恢复工作变更</span><br><span class="line">git stash apply</span><br><span class="line"># 安装依赖，配置运行环境等</span><br><span class="line">npm install...</span><br><span class="line"># 启动，继续开发</span><br><span class="line">npm run...</span><br></pre></td></tr></table></figure>
+
+<p>如果一天内这样的事情多次出现，你的工作效率会相当低效，时间都耗费在没必要的上下文切换上了.</p>
+<p>想象一下如果我们可以同时 Checkout 多个分支，每个分支有自己专属的工作文件夹，是不是就不用这么折腾了？</p>
+<p>确实是这样子的，这个频繁上下文切换的问题 git 团队也注意到了，为了解决它，git 2.5 版本开始支持 <a target="_blank" rel="noopener" href="https://git-scm.com/docs/git-worktree">multiple worktrees</a>，你可以在一个 git repo 里同时创建多个 worktree 拷贝，每个 worktree 都有专属于自己的分支, 类似下图：</p>
+<p><img src="https://s2.loli.net/2022/07/11/bqQ4cdguWPxza3Z.webp" alt="bosswift-git-worktree-explain"><br>有了 git worktree，分支切换就变成了 cd 到不同的 worktree 目录，每个分支都可以拥有自己的独立工作目录，东西不会揉在一起，stash 命令也用不上了：</p>
+<p><img src="https://s2.loli.net/2022/07/11/U62tEvT1gIrsKlY.jpg" alt="bosswift-new-fashion"></p>
+<p>更重要的是，你不需要重新安装项目依赖，因为你的工作代码没有任何改动！</p>
+<p>git worktree 也可以帮我们确保本地一直有一个可以运行的分支，不会受你当前工作的影响，这一点有时候很重要。</p>
+<h2 id="一个东西能解决问题，那它一定会带来新的问题"><a href="#一个东西能解决问题，那它一定会带来新的问题" class="headerlink" title="一个东西能解决问题，那它一定会带来新的问题"></a>一个东西能解决问题，那它一定会带来新的问题</h2><p>纯命令行使用 git worktree 有以下问题：</p>
+<ul>
+<li>创建和删除 worktree 要手打的东西实在太多了, 得指定 worktree 路径，指定新分支名等，经常写错要删了 worktree 重来</li>
+<li>切换分支要 cd 来 cd 去，常常忘了自己在哪里要干什么，也比较容易切错目录</li>
+<li>磁盘占用多，每个 worktree 里第三方依赖都得单独拷贝一份</li>
+</ul>
+<h2 id="✨✨✨-Bosswift-✨✨✨"><a href="#✨✨✨-Bosswift-✨✨✨" class="headerlink" title="✨✨✨ Bosswift ✨✨✨"></a>✨✨✨ Bosswift ✨✨✨</h2><p>为了解决命令行使用 git worktree 的这些痛点，<strong>Bosswift</strong> 应运而生。</p>
+<p><strong>Bosswift</strong> 与 git worktree 深度集成，帮助你用 UI 的方式轻松管理 worktree。<br><img src="https://s2.loli.net/2022/07/11/dQnKzR5gjMTA718.png" alt="bosswift-introduction"></p>
+<h1 id="安装-配置"><a href="#安装-配置" class="headerlink" title="安装 + 配置"></a>安装 + 配置</h1><p>从<a target="_blank" rel="noopener" href="https://github.com/xiaogdgenuine/bosswift/releases/latest">这里下载</a>最新的安装包，双击安装。<br><img src="https://s2.loli.net/2022/07/11/E9tuLSBJAUX6bjd.png" alt="bosswift-install"><br>第一次打开 <strong>Bosswift</strong> 需要一点配置，主要就是选一下你平时的工作目录，这样 <strong>Bosswift</strong> 就可以随时同步 Worktree 状态，我习惯是创建一个 dev 目录存放所有工作项目：<br><img src="https://s2.loli.net/2022/07/11/WJIgGTZHxsq92ak.png" alt="bosswift-on-boarding"></p>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>配置完成后，按下 Option + Space (默认快捷键)，<strong>Bosswift</strong> 的快速启动框就打开了。<br><img src="https://s2.loli.net/2022/07/11/BA4dlWFDEuaqjVe.png" alt="bosswift-quick-launch-bar"><br>输入关键字搜索想要执行命令的分支（各代表一个 worktree），回车或者按 Tab 键选中：<br><img src="https://s2.loli.net/2022/07/11/icIqUQ8T3s9m1jX.png" alt="bosswift-quick-launch-search-branch"><br>搜索想要执行的命令，<strong>Bosswift</strong> 里已经自带了一些常用命令，回车即可执行：<br><img src="https://s2.loli.net/2022/07/11/9tc7LSs6mf5IJMQ.png" alt="bosswift-quick-pick-command"></p>
+<h2 id="创建新的-Worktree"><a href="#创建新的-Worktree" class="headerlink" title="创建新的 Worktree"></a>创建新的 Worktree</h2><p>当你需要新的 worktree 时，执行这个命令：<br><img src="https://s2.loli.net/2022/07/11/6EXZYkdlr5Pa2Jv.png" alt="bosswift-create-worktree"><br>此命令可基于选中的分支创建新的 worktree，你只需要输入分支名即可：<br><img src="https://s2.loli.net/2022/07/11/N7PVZYqS6zlv2nC.png" alt="bosswift-create-worktree-branch-name"><br>该命令会自动处理好以下几种 case</p>
+<ul>
+<li>本地已经有同名分支：将新 worktree 切换到该分支。</li>
+<li>本地没有对应分支，但是远端有：拉取该分支到本地，创建新 worktree 并切换到该分支。</li>
+<li>本地和云端均没有同名分支：创建新 worktree 并创建新分支。</li>
+</ul>
+<p>你可以修改该命令，在末尾添加诸如 “<strong>从源分支 worktree 拷贝 node_modules</strong>“ 等操作，避免新 worktree 需要重新安装第三方依赖浪费时间。</p>
+<h2 id="删除-Worktree"><a href="#删除-Worktree" class="headerlink" title="删除 Worktree"></a>删除 Worktree</h2><p>当你不再需要某个 worktree 时，执行这个命令删除对应的 worktree 文件夹：<br><img src="https://s2.loli.net/2022/07/11/KXynVNlpHodg69h.png" alt="bosswift-delete-worktree"><br>你可以修改该命令，在末尾添加清理操作，比如删除对应的 Xcode Derived Data 目录节省磁盘占用。</p>
+<h1 id="编写自定义命令"><a href="#编写自定义命令" class="headerlink" title="编写自定义命令"></a>编写自定义命令</h1><p>如果连自己的命令都不能编写还算什么 Boss 呢~<br>我鼓励你编写适用于你项目的各种命令，<strong>Bosswift</strong> 会给你提供力所能及的帮助，一些可以使用的变量会在脚步运行时提供：<br><img src="https://s2.loli.net/2022/07/11/rvRZuxigzPkdTVJ.png" alt="bosswift-command-glossary"></p>
+<p>以选中了 &#x2F;Users&#x2F;huikai&#x2F;dev 下 Doll Repo 的 feature 分支为例，以下是各变量的解释和对应值:</p>
+<table>
+<thead>
+<tr>
+<th>变量名</th>
+<th>意义</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$BOSSWIFT_WORK_FOLDER</td>
+<td>Bosswift 的工作目录</td>
+<td>&#x2F;Users&#x2F;huikai&#x2F;dev</td>
+</tr>
+<tr>
+<td>$BOSSWIFT_PROJECT_NAME</td>
+<td>当前选中的 Repo 文件夹名</td>
+<td>Doll</td>
+</tr>
+<tr>
+<td>$BOSSWIFT_BRANCH_NAME</td>
+<td>当前选中的 Branch 名</td>
+<td>feature</td>
+</tr>
+<tr>
+<td>$BOSSWIFT_WORKTREE_PATH</td>
+<td>当前 Worktree 的路径</td>
+<td>&#x2F;Users&#x2F;huikai&#x2F;dev&#x2F;Bosswift_Work&#x2F;Doll&#x2F;feature</td>
+</tr>
+<tr>
+<td>$BOSSWIFT_DEFAULT_WORKTREE_PATH</td>
+<td>Repo 默认 Worktree 的路径</td>
+<td>&#x2F;Users&#x2F;huikai&#x2F;dev&#x2F;Doll</td>
+</tr>
+<tr>
+<td>$BOSSWIFT_XCODE_DERIVED_PATH</td>
+<td>Worktree 对应的 Xcode Derived Data 路径（Apple 开发者特供）</td>
+<td>&#x2F;Users&#x2F;huikai&#x2F;Library&#x2F;Developer&#x2F;Xcode&#x2F;DerivedData&#x2F;Doll-cikiwqgnfwrbgzgebttnrazqigks</td>
+</tr>
+<tr>
+<td>$BOSSWIFT_XCODE_WORKSPACE_FILE</td>
+<td>当前 Worktree 里的 xcworkspace 文件名（Apple 开发者特供）</td>
+<td>Doll.xcworkspace</td>
+</tr>
+<tr>
+<td>$BOSSWIFT_XCODE_PROJECT_FILE</td>
+<td>当前 Worktree 里的 xcodeproj 文件名（Apple 开发者特供）</td>
+<td>Doll.xcodeproj</td>
+</tr>
+</tbody></table>
+<h1 id="Dashboard-查看运行中的命令"><a href="#Dashboard-查看运行中的命令" class="headerlink" title="Dashboard 查看运行中的命令"></a>Dashboard 查看运行中的命令</h1><p>可以在 Dashboard 管理正在运行中的任务：<br><img src="https://s2.loli.net/2022/07/11/sdKzgDEtYRvQj5N.png" alt="bosswift-dashboard"></p>
+<h1 id="作为常用命令管理器-Universal-Command"><a href="#作为常用命令管理器-Universal-Command" class="headerlink" title="作为常用命令管理器 (Universal Command)"></a>作为常用命令管理器 (Universal Command)</h1><p>有一些命令是全局的，时不时就得跑一下，比如为了解决 Xcode 认不出手机的问题，我常需要重启 usb 服务，但是我总是忘了怎么写，需要去各种笔记软件里拷贝出来很麻烦。</p>
+<p>有了 <strong>Bosswift</strong>，这些命令都可以统一存放到 Universal Command 里了：<br><img src="https://s2.loli.net/2022/07/11/ivKCaHUuGOwADyX.png" alt="bosswift-universal-commands"><br>在快速启动框输入 “&#x2F;” 就可以选择 Universal Command 去执行了：<br><img src="https://s2.loli.net/2022/07/11/tkEiXnsAhY9Bxcb.png" alt="bosswift-select-universal-command"></p>
+<h1 id="作为临时命令启动器"><a href="#作为临时命令启动器" class="headerlink" title="作为临时命令启动器"></a>作为临时命令启动器</h1><p>在快速启动框输入的关键字如果没有任何匹配项，就可以直接回车作为临时命令执行：<br><img src="https://s2.loli.net/2022/07/11/UIE45RKTbSrCiNg.png" alt="bosswift-temporary-commands"></p>
+<h2 id="命令行-还是-GUI"><a href="#命令行-还是-GUI" class="headerlink" title="命令行 还是 GUI"></a>命令行 还是 GUI</h2><p>或许是命令行打得太少的缘故，我从没有体会过那种键指如飞框框框一回车就把活干完的快感，反而是很多命令我都要仔细检查，生怕打错一个字，把文件写到不该写的地方，把不该删的文件删了，确认没问题后我才敢回车，效率并没有很高。</p>
+<p>说一句违背祖宗的话，作为一个程序员，我一直对命令行喜欢不起来，甚至有点怕命令行，diff 还有合并冲突这些事都喜欢用死贵的 GUI 工具（如 JetBrains 系列）来完成。</p>
+<p>可是 GUI 在重复任务自动化方面是完全不行的，各个程序的界面设计也良莠不齐，遇到难用的真还不如手打命令。</p>
+<p>很幸运，这不是一个非此即彼的问题，把格局打开，GUI 里可以有命令行，命令行也可以调 GUI 嘛。</p>
+<p>命令行在自动化和功能可造性上都是碾压 GUI 的，<strong>Bosswift</strong> 离不开命令行，它背后的核心是 <em>screen</em> 命令（用来分发任务），为了实现任务管理，<em>ps</em>, <em>grep</em>, <em>pkill</em> 等命令也是必不可少的，把这些命令和易用的 GUI 结合在一起，配合一些巧妙的引导，GUI 能帮助用户毫无心理压力地执行任务（一些优秀的防呆设计可以做到这点），最后命令行默默把活干了就行。</p>
+<h1 id="代码地址"><a href="#代码地址" class="headerlink" title="代码地址"></a>代码地址</h1><p><a target="_blank" rel="noopener" href="https://github.com/xiaogdgenuine/bosswift">https://github.com/xiaogdgenuine/bosswift</a></p>
+<p>免责声明：<br>我一向风格就是能跑就行，把活干了再来扯别的，所以代码洁癖千万不要看，血压会上来，Repo 里充满了丑陋的全局变量，不合理的模块划分，以及各种自以为是的环境假设。</p>
+
+</div> 
+
+<script>
+    window.onload = detectors();
+</script>
+    <div class="post-footer">
+    <div class="h-line-primary"></div>
+    <nav class="post-nav">
+        <div class="prev-item">
+           
+        </div>
+        <div class="next-item">
+            
+                <div class="icon arrow-right"></div>
+                <div class="post-link">
+                  <a href="/posts/on-blog-launch/">下一篇</a>  
+                </div>  
+            
+        </div>
+    </nav>
+</div>
+
+    
+      <div class="post-comment">
+    
+    
+        <div id="vcomments"></div>
+        <script>
+            var META = ['nick', 'mail', 'link'];
+            var meta = 'nick,mail';
+            meta = meta.split(',').filter(item => {
+                return META.includes(item);
+            });
+            new Valine({
+                el: '#vcomments',
+                appId: '',
+                appKey: '',
+                lang: 'zh-cn',
+                placeholder: '说点什么',
+                avatar: 'mp',
+                meta: meta
+            })
+        </script>    
+     
+
+    
+     
+    
+    
+
+</div>
+     
+  
+</article>
+        </div>
+      </div>
+      
+      <div class="footer">
+    <div class="flex-container">
+        <div class="footer-text">
+            
+            
+                © Huikai Chen | 
+            
+            
+                Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & <a target="_blank" rel="noopener" href="https://github.com/zoeingwingkei/frame/">Frame</a>
+                
+        </div>
+    </div>
+</div>
+
+    </div>
+
+  </body>
+</html>
