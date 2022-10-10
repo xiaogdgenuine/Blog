@@ -5,6 +5,19 @@ tags:
 - Kedamanga
 ---
 
+## Version 1.5.2:
+Features
+- Image that can't fit into the page will now be put inside a scroll view.
+
+Fixes
+- Fix folder browser's back button missing issue in iOS 16.
+- Fix an issue that cause some azw3 files to render duplicated.
+- Fix an issue that cause pinch gesture freeze the app.
+
+## Version 1.5.1:
+Fixes
+- Fix a bug that cause long comic image display in-position.
+
 ## Version 1.5.0：
 
 I'm very sorry about taking so long yet just release a bug fix version, I'm still working on premier version.
