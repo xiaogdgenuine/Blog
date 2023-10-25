@@ -1,9 +1,22 @@
 ---
 title: "Kedamanga Changelog"
-date: 2022-09-17 23:20:05
+date: 2023-10-25 23:20:05
 tags:
 - Kedamanga
 ---
+
+## Version 1.6.0:
+This time I bring you a fresh bookshelf, fix tons of crashes, as well as adding lots of enhancements.
+
+Features
+- Fresh new bookshelf.
+- [Texture background] - makes you feel holding an real book.
+- You can now pull to close the reader.
+- New「Presets」setting to help you manage settings for multiple type of comics.
+
+Fixes
+- New PDF rendering engine, no content loss anymore!
+- Improve memory usage, less crashing when openning big files.
 
 ## Version 1.5.2:
 Features
