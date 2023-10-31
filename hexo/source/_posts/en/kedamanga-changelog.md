@@ -5,6 +5,18 @@ tags:
 - Kedamanga
 ---
 
+## Version 1.6.1:
+Features
+- You can now hide "Reading" tab, toggle it in setting.
+- You can now disable "Double tap to zoom in" gesture in reader setting.
+- Support reverse image order after split it.
+- WiFi server now supports private mode.
+- Support reading file in WebDAV server even if it doesn't support streaming reading.
+
+Fixes
+- Handle back slash properly in RAR files.
+- Fix PDF file can't be open in WebDAV server issue.
+
 ## Version 1.6.0:
 This time I bring you a fresh bookshelf, fix tons of crashes, as well as adding lots of enhancements.
 
