@@ -5,6 +5,11 @@ tags:
 - Kedamanga
 ---
 
+## Version 1.6.2:
+Fixes
+- Support solid rar files.
+- Support filename encrypted rar files.
+
 ## Version 1.6.1:
 Features
 - You can now hide "Reading" tab, toggle it in setting.
