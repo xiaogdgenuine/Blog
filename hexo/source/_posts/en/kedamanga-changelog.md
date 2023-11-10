@@ -5,6 +5,13 @@ tags:
 - Kedamanga
 ---
 
+## Version 1.6.3:
+Features
+- Support connect to Aliyundrive.
+- Support RAR files with SFX module.
+- A faster cache cleanup implementation.
+- Support turning page by pageUp, pageDown key.
+
 ## Version 1.6.2:
 Fixes
 - Support solid rar files.
