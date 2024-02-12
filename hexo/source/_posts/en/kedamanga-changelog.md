@@ -5,6 +5,80 @@ tags:
 - Kedamanga
 ---
 
+## Version 2.0.0:
+Features
+- Now you can sync comics between devices with "iCloud Drive"
+- Now you can sync reading histories, settings, bookmarks between devices with "iCloud"
+- Now you can customize cover for all comics
+- New "Random mode" feature can help you decide what comic book to read today :P
+
+Fixes
+- Fix some gesture conflicts in the Reader
+
+## Version 1.7.2:
+Features
+- You can now long press empty area in Bookshelf to import files quickly
+
+Fixes
+- Fix EPUB file infinite loop bug when nested inside another archive
+
+## Version 1.7.1:
+Features
+- Now you can turn off the「Downloads」folder in app setting, everything will save directly to the 「Library」
+
+Fixes
+- Fix private mode function crash on iOS 16 bug
+- Fix clear reading history crash the app bug
+- Fix a crash bug when sharing files on iPad
+- Better support for EPUB files
+
+## Version 1.7.0:
+Features
+- Redesigned control panel for reader
+- You can now open PDF files with password protected
+- Now the app support flip pages automatically
+
+Fixes
+- Fix a blurry bug when zoom in a large image
+- Fix a bug that cause the private mode not working when device is locked
+
+## Version 1.6.9:
+Fixes
+- Fix a bug that cause cover display delayed few seconds.
+
+## Version 1.6.8:
+Features
+- Now you can double tap "Tab bar icon" and quickly go back to root view.
+- You can now select and delete multiple reading records at once.
+- Reading histories of「Download」folder will be showing Reading tab as well.
+
+Fixes
+- Fix a bug that cause reading progress lost during screen rotation.
+- Fix a bug that cause reading history can't be delete.
+
+## Version 1.6.7:
+Features
+- New layout option for Bookshelf - Card mode.
+
+Fixes
+- Fix scroll glitching in Bookshelf view
+- Improve scroll performance for Bookshelf view
+
+## Version 1.6.6:
+Features
+- Clear reading progress of a folder will clear all the reading history of it's nested items as well
+
+Fixes
+- Fix a bug that cause status bar never hide after switch to next comic book
+
+## Version 1.6.5:
+Features
+- Add new "Default view when open app" option, you can now pick which view you want to see first after launch the app.
+- You can now pinch to resize book size inside "Reading" tab, just like in Library.
+
+Fixes
+- Fix a bug that cause some reading progresses may not save properly.
+
 ## Version 1.6.3:
 Features
 - Support connect to Aliyundrive.
